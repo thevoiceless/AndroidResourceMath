@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="five">5dp</dimen>
+    <dimen name="ten">10dp</dimen>
+    <dimen name="fifteen">@dimen/five + @dimen/ten</dimen>
+    <dimen name="fifteen_ref">@dimen/fifteen</dimen>
+    <dimen name="twenty">@dimen/five * 4dp</dimen>
+    <dimen name="nine">@dimen/five + 4dp</dimen>
+    <dimen name="two">@dimen/five - 3dp</dimen>
+    <dimen name="one">@dimen/five / 5dp</dimen> 
+    <!-- TODO: Handle unit mismatch --> 
+
+</resources>
