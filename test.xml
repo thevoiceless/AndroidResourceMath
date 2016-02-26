@@ -9,6 +9,10 @@
     <dimen name="nine">@dimen/five + 4dp</dimen>
     <dimen name="two">@dimen/five - 3dp</dimen>
     <dimen name="one">@dimen/five / 5dp</dimen> 
-    <!-- TODO: Handle unit mismatch --> 
+    <!--
+        TODO:
+        - Handle unit mismatch for addition/subtraction
+        - Multiply/divide by whole numbers (no unit)
+    -->
 
 </resources>
