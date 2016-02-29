@@ -1,9 +1,11 @@
 #! /usr/bin/env python
 
+import os
 import xml.etree.ElementTree as ET
 import re
 
-tree = ET.parse('test.xml')
+thisDir = os.path.dirname(os.path.realpath(__file__))
+tree = ET.parse(thisDir + '/test.xml')
 root = tree.getroot()
 
 evaluated_dimens = {}
@@ -34,4 +36,4 @@ for child in root.iter('dimen'):
         do_math(child)
     evaluated_dimens[dimen_name] = child.text
 
-tree.write('out.xml')
+tree.write(thisDir + '/out.xml')

@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+class PythonTask extends DefaultTask {
+    @TaskAction
+    def processXml() {
+        println 'Processing XML...'
+        def command = """ ./misc/test.py """
+        def proc = command.execute()
+        proc.waitFor()
+        println proc?.in?.text
+        println "Done"
+    }
+}
+
+apply plugin: PythonPlugin
+
+class PythonPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        project.task('processXmlPlugin', type: PythonTask)
+    }
+}
