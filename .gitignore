@@ -1,3 +1,4 @@
 *.pyc
 *.xml
 !test.xml
+.DS_Store
