@@ -17,10 +17,45 @@ class PythonTask extends DefaultTask {
     }
 }
 
-apply plugin: PythonPlugin
+apply plugin: ProcessXmlMath
 
-class PythonPlugin implements Plugin<Project> {
+class ProcessXmlMath implements Plugin<Project> {
     void apply(Project project) {
-        project.task('processXmlPlugin', type: PythonTask)
+        project.task('processXmlMath') << {
+            if (project.hasProperty("android")) {
+                def xmlFiles = new HashSet<File>()
+
+                project.android.applicationVariants.all { variant ->
+                    variant.sourceSets.each { sourceSet ->
+                        sourceSet.res.srcDirs.each { dir ->
+                            def printedDirectory = false
+                            if (dir.isDirectory()) {
+                                dir.eachDirRecurse { child ->
+                                    if (child.name.contains("values")) {
+                                        child.eachFileMatch(~/.*\.xml/) { xml ->
+                                            if (!xmlFiles.contains((File) xml)) {
+                                                if (!printedDirectory) {
+                                                    println "-----"
+                                                    println dir
+                                                    printedDirectory = true
+                                                }
+                                                println "adding " + xml
+                                            }
+                                            xmlFiles.add((File) xml)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                println "-----"
+                println xmlFiles.size() + " files"
+                println "-----"
+            } else {
+                println "No android project detected"
+            }
+        }
     }
 }
